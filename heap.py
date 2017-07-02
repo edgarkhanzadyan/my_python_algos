@@ -1,4 +1,4 @@
-import time
+import timeit
 not_sorted_heap = [1, 43, 23 ,65 ,8 , 653, 345, 324, 8, 8]
 sort_it = range(10000000)
 
@@ -12,12 +12,9 @@ class Heap:
         self.build_max_heap()
         
     def build_max_heap (self):
-        #ts = time.time()
         heap_size = len(self.heap)
         for x in range(heap_size//2, -1, -1):
             self.heap = self.max_heapify(x)
-        #new_ts = time.time()
-        #print new_ts - ts
         
     def swap (self, a, b):
         tmp = self.heap[a]
@@ -64,7 +61,14 @@ class Heap:
     def get_max (self):
         return self.heap[0]
     
-arr = Heap(not_sorted_heap)
+    def get_sorted (self):
+        arr = []
+        for x in range(len(self.heap)):
+            arr.append(self.extract_max())
+        return arr
+    
+smth = range(10000)
+arr = Heap(smth)
 #arr = Heap(sort_it)
-print arr.heap
+print timeit.timeit(arr.get_sorted, number=1)
 # range of 10 million numbers it sorts in 30.8309111595
